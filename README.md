@@ -18,5 +18,4 @@ Las operaciones se envian bajo el objeto operationType y se pueden poner tanto p
 De esta manera un ejemplo de peticion seria la siguiente "http://localhost:8080/iteriam/api/calculate?operator3=1&operator2=10&operationType=multiplication" y el resultado que nos devolveria seria 30.
 Ademas tambien podremos ver el resultado de la operacion en la consola donde hemos ejecutado el archivo .jar con una traza en la que nos da el resultado de la operacion.
 
-[![Build Status](https://travis-ci.org/e-ucm/rage-analytics-realtime.svg?branch=master)](https://travis-ci.org/e-ucm/rage-analytics-realtime) [![Coverage Status](https://coveralls.io/repos/github/cmodest/calculator/badge.svg?branch=master)](https://coveralls.io/github/cmodest/calculator?branch=master)
-
+[![Build Status](https://travis-ci.org/e-ucm/rage-analytics-realtime.svg?branch=master)](https://travis-ci.org/e-ucm/rage-analytics-realtime) 
