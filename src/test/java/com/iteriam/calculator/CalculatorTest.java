@@ -1,4 +1,4 @@
-package com.iteriam.calculator.controllers;
+package com.iteriam.calculator;
 
 import com.iteriam.calculator.Application;
 import junit.framework.TestCase;
@@ -16,7 +16,7 @@ import java.net.URISyntaxException;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class CalculatorControllerTest extends TestCase {
+public class CalculatorTest extends TestCase {
 
     @LocalServerPort
     int randomServerPort;
@@ -37,6 +37,8 @@ public class CalculatorControllerTest extends TestCase {
     public void testCalculate() {
         try {
             ResponseEntity<Double> resultado = calcula(1, 1, "add");
+            assertEquals(200, resultado.getStatusCodeValue());
+            assertEquals(2.0, resultado.getBody());
         }
         catch (Exception e){
             Assert.fail();
