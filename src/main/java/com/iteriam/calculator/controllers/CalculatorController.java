@@ -18,7 +18,7 @@ public class CalculatorController {
     private TracerImpl tracer = new TracerImpl();
 
     @Autowired
-    CalculatorService calculatorService;
+    private CalculatorService calculatorService;
 
 
     @GetMapping("/calculate")
@@ -26,7 +26,7 @@ public class CalculatorController {
                                             @RequestParam(name = "operator2") String operator2,
                                             @RequestParam(name = "operationType") String type) {
 
-        double result = calculatorService.calculate(operator1,operator2,type);
+        double result = this.calculatorService.calculate(operator1,operator2,type);
 
         tracer.trace("The result of the operation is: " + result);
 
