@@ -16,7 +16,6 @@
     </properties>
 
     <dependencies>
-
         <!-- mvc -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -38,6 +37,7 @@
             <version>2.1.6.RELEASE</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <build>
