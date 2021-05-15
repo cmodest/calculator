@@ -1,44 +1,42 @@
 package com.iteriam.calculator.controllers;
 
+import com.iteriam.calculator.Application;
 import junit.framework.TestCase;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.client.RestTemplate;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
+import java.net.URI;
+import java.net.URISyntaxException;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(controllers = CalculatorController.class)
+@SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class CalculatorControllerTest extends TestCase {
 
-    @Autowired
-    private MockMvc mockMvc;
+    @LocalServerPort
+    int randomServerPort;
 
-    @InjectMocks
-    private CalculatorController calculatorController;
+    private ResponseEntity<Double> calcula(double primero, double segundo, String operacion) throws URISyntaxException {
+        RestTemplate restTemplate = new RestTemplate();
 
-    @Before
-    public void setUp() throws Exception {
-        super.setUp();
-        MockitoAnnotations.initMocks(this);
+        final String baseUrl = "http://localhost:" + randomServerPort +
+                "/iteriam/api/calculate?operator1=" + primero +
+                "&operator2=" + segundo + "&operationType=" + operacion;
+        URI uri = new URI(baseUrl);
 
-        mockMvc = MockMvcBuilders.standaloneSetup(calculatorController).build();
+        ResponseEntity<Double> resultado = restTemplate.getForEntity(uri, Double.class);
+        return resultado;
     }
 
     @Test
     public void testCalculate() {
-        try{
-            mockMvc.perform(get("/iteriam/api/calculate/?operator1=1&operator2=1&operationType=+")).andExpect(status().isOk());
+        try {
+            ResponseEntity<Double> resultado = calcula(1, 1, "add");
         }
         catch (Exception e){
             Assert.fail();
