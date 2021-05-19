@@ -1,6 +1,8 @@
 package com.iteriam.calculator.services;
 
+import java.math.BigDecimal;
+
 public interface CalculatorService {
 
-    double calculate (String operator1, String operator2, String type);
+    BigDecimal calculate (BigDecimal operator1, BigDecimal operator2, String type);
 }

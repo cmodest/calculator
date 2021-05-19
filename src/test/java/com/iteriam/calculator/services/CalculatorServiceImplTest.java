@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.math.BigDecimal;
+
 import static org.junit.Assert.*;
 
 public class CalculatorServiceImplTest {
@@ -17,61 +19,72 @@ public class CalculatorServiceImplTest {
 
     @Test
     public void calculateAddTest() {
-        double result1 = calculatorService.calculate("10","1","+");
-        double result2 = calculatorService.calculate("1","10","add");
-        double result3 = calculatorService.calculate("1","10","ADD");
-        double result4 = calculatorService.calculate("10","1","Add");
-        assertEquals(result1,result2,0);
-        assertEquals(result3,result1,0);
-        assertEquals(result2,result4,0);
+        BigDecimal result1 = calculatorService.calculate(new BigDecimal(10),new BigDecimal(1),"+");
+        BigDecimal result2 = calculatorService.calculate(new BigDecimal(1),new BigDecimal(10),"add");
+        BigDecimal result3 = calculatorService.calculate(new BigDecimal(1),new BigDecimal(10),"ADD");
+        BigDecimal result4 = calculatorService.calculate(new BigDecimal(10),new BigDecimal(1),"Add");
+        assertEquals(result1,result2);
+        assertEquals(result3,result1);
+        assertEquals(result2,result4);
     }
 
     @Test
     public void calculateMultiplicationTest() {
-        double result1 = calculatorService.calculate("10","1","*");
-        double result2 = calculatorService.calculate("1","10","multiplication");
-        double result3 = calculatorService.calculate("1","10","MULTIPLICATION");
-        double result4 = calculatorService.calculate("10","1","MultIPliCatiOn");
-        assertEquals(result1,result2,0);
-        assertEquals(result3,result1,0);
-        assertEquals(result2,result4,0);
+        BigDecimal result1 = calculatorService.calculate(new BigDecimal(10),new BigDecimal(1),"*");
+        BigDecimal result2 = calculatorService.calculate(new BigDecimal(1),new BigDecimal(10),"multiplication");
+        BigDecimal result3 = calculatorService.calculate(new BigDecimal(1),new BigDecimal(10),"MULTIPLICATION");
+        BigDecimal result4 = calculatorService.calculate(new BigDecimal(10),new BigDecimal(1),"MultIPliCatiOn");
+        assertEquals(result1,result2);
+        assertEquals(result3,result1);
+        assertEquals(result2,result4);
     }
 
     @Test
     public void calculateSubstractionTest() {
-        double result1 = calculatorService.calculate("10","1","-");
-        double result2 = calculatorService.calculate("1","10","substraction");
-        double result3 = calculatorService.calculate("1","10","SUBSTRACTION");
-        double result4 = calculatorService.calculate("10","1","subStraCTion");
-        assertNotEquals(result1,result2,0);
-        assertEquals(result4,result1,0);
-        assertEquals(result2,result3,0);
+        BigDecimal result1 = calculatorService.calculate(new BigDecimal(10),new BigDecimal(1),"-");
+        BigDecimal result2 = calculatorService.calculate(new BigDecimal(1),new BigDecimal(10),"substraction");
+        BigDecimal result3 = calculatorService.calculate(new BigDecimal(1),new BigDecimal(10),"SUBSTRACTION");
+        BigDecimal result4 = calculatorService.calculate(new BigDecimal(10),new BigDecimal(1),"subStraCTion");
+        assertNotEquals(result1,result2);
+        assertEquals(result4,result1);
+        assertEquals(result2,result3);
     }
 
     @Test
     public void calculateDivisionTest() {
-        double result1 = calculatorService.calculate("10","1","/");
-        double result2 = calculatorService.calculate("1","10","division");
-        double result3 = calculatorService.calculate("1","10","DIVISION");
-        double result4 = calculatorService.calculate("10","1","DivISiOn");
-        assertNotEquals(result1,result2,0);
-        assertEquals(result4,result1,0);
-        assertEquals(result2,result3,0);
+        BigDecimal result1 = calculatorService.calculate(new BigDecimal(10),new BigDecimal(1),"/");
+        BigDecimal result2 = calculatorService.calculate(new BigDecimal(1),new BigDecimal(10),"division");
+        BigDecimal result3 = calculatorService.calculate(new BigDecimal(1),new BigDecimal(10),"DIVISION");
+        BigDecimal result4 = calculatorService.calculate(new BigDecimal(10),new BigDecimal(1),"DivISiOn");
+        assertNotEquals(result1,result2);
+        assertEquals(result4,result1);
+        assertEquals(result2,result3);
     }
 
     @Test
-    public void calculateExceptionTest(){
+    public void calculateSymbolExceptionTest(){
         try {
-            double result = calculatorService.calculate("10", "1", "?");
+            calculatorService.calculate(new BigDecimal(1),new BigDecimal(10), "?");
         }
         catch (RuntimeException re){
             assertEquals(re.getClass(),RuntimeException.class);
         }
-        try {
-            double result = calculatorService.calculate("10", "1", "alghai");
-        }
-        catch (RuntimeException re){
-            assertEquals(re.getClass(),RuntimeException.class);
+        catch (Exception e){
+            Assert.fail();
         }
     }
+
+    @Test
+    public void calculateOperationExceptionTest(){
+        try {
+            calculatorService.calculate(new BigDecimal(1),new BigDecimal(10), "haz algo");
+        }
+        catch (RuntimeException re){
+            assertEquals(re.getClass(),RuntimeException.class);
+        }
+        catch (Exception e){
+            Assert.fail();
+        }
+    }
+
 }

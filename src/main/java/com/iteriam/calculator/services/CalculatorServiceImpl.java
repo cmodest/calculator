@@ -3,6 +3,8 @@ package com.iteriam.calculator.services;
 import io.corp.calculator.TracerImpl;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 @Service
 public class CalculatorServiceImpl implements CalculatorService{
 
@@ -10,21 +12,20 @@ public class CalculatorServiceImpl implements CalculatorService{
     private TracerImpl tracer = new TracerImpl();
 
     @Override
-    public double calculate(String operator1, String operator2, String type){
+    public BigDecimal calculate(BigDecimal operator1, BigDecimal operator2, String type){
 
         getOperation(type);
-        Double op1 = Double.valueOf(operator1);
-        Double op2 = Double.valueOf(operator2);
+
 
         switch (operationType){
             case "add":
-                return op1 + op2;
+                return operator1.add(operator2);
             case "substraction":
-                return op1 - op2;
+                return operator1.subtract(operator2);
             case "multiplication":
-                return op1 * op2;
+                return operator1.multiply(operator2);
             case "division":
-                return op1 / op2;
+                return operator1.divide(operator2);
             default:
                 tracer.trace("ERROR: Operation not supported " + type);
                 throw new RuntimeException("Operation not supported "  +type);

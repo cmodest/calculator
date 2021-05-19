@@ -44,4 +44,9 @@ public class CalculatorTest extends TestCase {
             Assert.fail();
         }
     }
+
+    @Test
+    public void contextLoads() {
+        Application.main(new String[0]);
+    }
 }
