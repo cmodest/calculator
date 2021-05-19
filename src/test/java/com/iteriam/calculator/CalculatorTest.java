@@ -1,6 +1,5 @@
 package com.iteriam.calculator;
 
-import com.iteriam.calculator.Application;
 import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,7 +11,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -31,8 +29,7 @@ public class CalculatorTest extends TestCase {
                 "&operator2=" + segundo + "&operationType=" + operacion;
         URI uri = new URI(baseUrl);
 
-        ResponseEntity<Double> resultado = restTemplate.getForEntity(uri, Double.class);
-        return resultado;
+        return restTemplate.getForEntity(uri, Double.class);
     }
 
     @Test
