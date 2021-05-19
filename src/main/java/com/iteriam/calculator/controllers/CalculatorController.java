@@ -11,22 +11,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
+
 @RestController
 @RequestMapping("iteriam/api")
 public class CalculatorController {
 
-    private TracerImpl tracer = new TracerImpl();
+    private final TracerImpl tracer = new TracerImpl();
 
     @Autowired
     private CalculatorService calculatorService;
 
 
     @GetMapping("/calculate")
-    public ResponseEntity<Double> calculate(@RequestParam(name = "operator1") String operator1,
-                                            @RequestParam(name = "operator2") String operator2,
-                                            @RequestParam(name = "operationType") String type) {
+    public ResponseEntity<BigDecimal> calculate(@RequestParam(name = "operator1") BigDecimal operator1,
+                                                @RequestParam(name = "operator2") BigDecimal operator2,
+                                                @RequestParam(name = "operationType") String type) {
 
-        double result = this.calculatorService.calculate(operator1,operator2,type);
+        final BigDecimal result = this.calculatorService.calculate(operator1,operator2,type);
 
         tracer.trace("The result of the operation is: " + result);
 
