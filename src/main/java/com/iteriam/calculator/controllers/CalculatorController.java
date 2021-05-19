@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 @RequestMapping("iteriam/api")
 public class CalculatorController {
 
-    private TracerImpl tracer = new TracerImpl();
+    private final TracerImpl tracer = new TracerImpl();
 
     @Autowired
     private CalculatorService calculatorService;
@@ -28,7 +28,7 @@ public class CalculatorController {
                                                 @RequestParam(name = "operator2") BigDecimal operator2,
                                                 @RequestParam(name = "operationType") String type) {
 
-        BigDecimal result = this.calculatorService.calculate(operator1,operator2,type);
+        final BigDecimal result = this.calculatorService.calculate(operator1,operator2,type);
 
         tracer.trace("The result of the operation is: " + result);
 
