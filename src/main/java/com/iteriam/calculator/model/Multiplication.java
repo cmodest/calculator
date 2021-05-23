@@ -1,8 +1,19 @@
 package com.iteriam.calculator.model;
 
+import org.springframework.stereotype.Component;
+
 import java.math.BigDecimal;
 
+@Component
 public class Multiplication implements Operation{
+
+    @Override
+    public Operation isThis(final String operation){
+        if(operation.equalsIgnoreCase("multiplication") || operation.equals("*")){
+            return new Multiplication();
+        }
+        return null;
+    }
 
     @Override
     public BigDecimal calculate(final BigDecimal operator1, final BigDecimal operator2){

@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
@@ -98,7 +98,7 @@ public class CalculatorTest extends TestCase {
             ResponseEntity<Double> resultado = calcula(10, 2, "operation");
         }
         catch (Exception e){
-            assertEquals(((HttpServerErrorException.InternalServerError) e).getRawStatusCode() , 500);
+            assertEquals(405,((HttpClientErrorException.MethodNotAllowed) e).getRawStatusCode());
         }
     }
 
