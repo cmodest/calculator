@@ -36,6 +36,7 @@ public class CalculatorServiceImpl implements CalculatorService{
             return operation.calculate(operator1, operator2);
         }
         catch (Exception e){
+            tracer.trace("Error looking for the operation");
             throw new OperationException("Operation Not supported " + type,e);
         }
     }

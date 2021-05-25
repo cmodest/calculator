@@ -37,6 +37,7 @@ public class CalculatorController {
             return new ResponseEntity<>(result, HttpStatus.OK);
         }
         catch (OperationException e){
+            tracer.trace("Operation not supported");
             return new ResponseEntity<>("Operation not supported",HttpStatus.METHOD_NOT_ALLOWED);
         }
     }
