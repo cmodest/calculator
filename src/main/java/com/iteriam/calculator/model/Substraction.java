@@ -8,11 +8,16 @@ import java.math.BigDecimal;
 public class Substraction implements Operation{
 
     @Override
-    public Operation isThis(final String operation){
+    public Boolean isThis(final String operation){
         if(operation.equalsIgnoreCase("substraction") || operation.equals("-")){
-            return new Substraction();
+            return true;
         }
-        return null;
+        return false;
+    }
+
+    @Override
+    public Operation createNew(){
+        return new Substraction();
     }
 
     @Override

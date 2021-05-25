@@ -22,6 +22,6 @@ class AdditionTest {
     void calculate() {
         addition = new Addition();
         BigDecimal result = addition.calculate(new BigDecimal(1), new BigDecimal(1));
-        assertTrue(result.equals(new BigDecimal(2)));
+        assertEquals(new BigDecimal(2),result);
     }
 }

@@ -4,7 +4,9 @@ import java.math.BigDecimal;
 
 public interface Operation {
 
-    Operation isThis(final String operation);
+    Boolean isThis(final String operation);
+
+    Operation createNew();
 
     BigDecimal calculate(final BigDecimal operator1, final BigDecimal operator2);
 }

@@ -9,11 +9,16 @@ import java.math.RoundingMode;
 public class Division implements Operation{
 
     @Override
-    public Operation isThis(final String operation){
+    public Boolean isThis(final String operation){
         if(operation.equalsIgnoreCase("division") || operation.equals("/")){
-            return new Division();
+            return true;
         }
-        return null;
+        return false;
+    }
+
+    @Override
+    public Operation createNew(){
+        return new Division();
     }
 
     @Override

@@ -28,8 +28,8 @@ public class CalculatorServiceImpl implements CalculatorService{
             Operation operation = null;
 
             for (Operation op : operations) {
-                operation = op.isThis(type);
-                if (Objects.nonNull(operation)) {
+                if (op.isThis(type)) {
+                    operation = op.createNew();
                     break;
                 }
             }

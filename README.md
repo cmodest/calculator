@@ -21,7 +21,7 @@ Para poner la operacion como simbolo la equivalencia de los simbolos al añadirl
 	,Simbolo "*" --> *
 	
 
-De esta manera un ejemplo de peticion seria la siguiente "http://localhost:8080/iteriam/api/calculate?operator3=1&operator2=10&operationType=multiplication" y el resultado que nos devolveria seria 30.
-Y otro ejemplo introduciendo la operacion como simbolo podria ser "http://localhost:8080/iteriam/api/calculate?operator3=1&operator2=10&operationType=%2B" y el resultado seria 13.
+De esta manera un ejemplo de peticion seria la siguiente "http://localhost:8080/iteriam/api/calculate?operator1=3&operator2=10&operationType=multiplication" y el resultado que nos devolveria seria 30.
+Y otro ejemplo introduciendo la operacion como simbolo podria ser "http://localhost:8080/iteriam/api/calculate?operator1=3&operator2=10&operationType=%2B" y el resultado seria 13.
 Ademas tambien podremos ver el resultado de la operacion en la consola donde hemos ejecutado el archivo .jar con una traza en la que nos da el resultado de la operacion.
 

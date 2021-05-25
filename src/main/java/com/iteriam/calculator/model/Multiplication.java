@@ -8,11 +8,16 @@ import java.math.BigDecimal;
 public class Multiplication implements Operation{
 
     @Override
-    public Operation isThis(final String operation){
+    public Boolean isThis(final String operation){
         if(operation.equalsIgnoreCase("multiplication") || operation.equals("*")){
-            return new Multiplication();
+            return true;
         }
-        return null;
+        return false;
+    }
+
+    @Override
+    public Operation createNew(){
+        return new Multiplication();
     }
 
     @Override

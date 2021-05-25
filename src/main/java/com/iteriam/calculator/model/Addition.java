@@ -8,11 +8,16 @@ import java.math.BigDecimal;
 public class Addition implements Operation{
 
     @Override
-    public Operation isThis(final String operation){
+    public Boolean isThis(final String operation){
         if(operation.equalsIgnoreCase("add") || operation.equals("+")){
-            return new Addition();
+            return true;
         }
-        return null;
+        return false;
+    }
+
+    @Override
+    public Operation createNew(){
+        return new Addition();
     }
 
     @Override
