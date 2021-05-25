@@ -26,7 +26,7 @@
 
         <!-- dependencia generada por el plugin maven-install plugin de abajo-->
         <dependency>
-            <groupId>com.iteriam</groupId>
+            <groupId>io.corp.calculator</groupId>
             <artifactId>tracer</artifactId>
             <version>1.0.0</version>
         </dependency>

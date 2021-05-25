@@ -1,28 +1,32 @@
 package com.iteriam.calculator;
 
-import junit.framework.TestCase;
 import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.web.client.RestClientException;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 
-@RunWith(SpringRunner.class)
+import static org.junit.Assert.assertEquals;
+
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class CalculatorTest extends TestCase {
+@ExtendWith(SpringExtension.class)
+public class CalculatorTest {
 
     @LocalServerPort
     int randomServerPort;
 
+    @Autowired
+    private TestRestTemplate restTemplate;
+
     private ResponseEntity<Double> calcula(double primero, double segundo, String operacion) throws URISyntaxException {
-        RestTemplate restTemplate = new RestTemplate();
 
         final String baseUrl = "http://localhost:" + randomServerPort +
                 "/iteriam/api/calculate?operator1=" + primero +
@@ -37,7 +41,7 @@ public class CalculatorTest extends TestCase {
         try {
             ResponseEntity<Double> resultado = calcula(1, 1, "add");
             assertEquals(200, resultado.getStatusCodeValue());
-            assertEquals(2.0, resultado.getBody());
+            assertEquals(2.0, resultado.getBody(),0);
             ResponseEntity<Double> resultado2 = calcula(1, 1, "%2B");
             assertEquals(200, resultado2.getStatusCodeValue());
             assertEquals(resultado.getBody(), resultado.getBody());
@@ -52,7 +56,7 @@ public class CalculatorTest extends TestCase {
         try {
             ResponseEntity<Double> resultado = calcula(1, 1, "substraction");
             assertEquals(200, resultado.getStatusCodeValue());
-            assertEquals(0.0, resultado.getBody());
+            assertEquals(0.0, resultado.getBody(),0);
             ResponseEntity<Double> resultado2 = calcula(1, 1, "-");
             assertEquals(200, resultado2.getStatusCodeValue());
             assertEquals(resultado.getBody(), resultado.getBody());
@@ -67,7 +71,7 @@ public class CalculatorTest extends TestCase {
         try {
             ResponseEntity<Double> resultado = calcula(10, 1, "multiplication");
             assertEquals(200, resultado.getStatusCodeValue());
-            assertEquals(10.0, resultado.getBody());
+            assertEquals(10.0, resultado.getBody(),0);
             ResponseEntity<Double> resultado2 = calcula(10, 1, "*");
             assertEquals(200, resultado2.getStatusCodeValue());
             assertEquals(resultado.getBody(), resultado.getBody());
@@ -82,7 +86,7 @@ public class CalculatorTest extends TestCase {
         try {
             ResponseEntity<Double> resultado = calcula(10, 2, "division");
             assertEquals(200, resultado.getStatusCodeValue());
-            assertEquals(5.0, resultado.getBody());
+            assertEquals(5.0, resultado.getBody(),0);
             ResponseEntity<Double> resultado2 = calcula(10, 2, "%2F");
             assertEquals(200, resultado2.getStatusCodeValue());
             assertEquals(resultado.getBody(), resultado.getBody());
@@ -98,7 +102,7 @@ public class CalculatorTest extends TestCase {
             ResponseEntity<Double> resultado = calcula(10, 2, "operation");
         }
         catch (Exception e){
-            assertEquals(405,((HttpClientErrorException.MethodNotAllowed) e).getRawStatusCode());
+            assertEquals(RestClientException.class, e.getClass());
         }
     }
 

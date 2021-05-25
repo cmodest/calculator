@@ -2,14 +2,9 @@ package com.iteriam.calculator.services;
 
 import com.iteriam.calculator.exception.OperationException;
 import com.iteriam.calculator.model.*;
-import com.sun.org.apache.xpath.internal.operations.Div;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -18,8 +13,6 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
-
-@RunWith(MockitoJUnitRunner.class)
 class CalculatorServiceImplTest {
 
     private static CalculatorService calculatorService;
