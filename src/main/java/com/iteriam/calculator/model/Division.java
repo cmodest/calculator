@@ -10,10 +10,7 @@ public class Division implements Operation{
 
     @Override
     public Boolean isThis(final String operation){
-        if(operation.equalsIgnoreCase("division") || operation.equals("/")){
-            return true;
-        }
-        return false;
+        return operation.equalsIgnoreCase("division") || operation.equals("/");
     }
 
     @Override

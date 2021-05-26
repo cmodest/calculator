@@ -9,10 +9,7 @@ public class Addition implements Operation{
 
     @Override
     public Boolean isThis(final String operation){
-        if(operation.equalsIgnoreCase("add") || operation.equals("+")){
-            return true;
-        }
-        return false;
+        return operation.equalsIgnoreCase("add") || operation.equals("+");
     }
 
     @Override
