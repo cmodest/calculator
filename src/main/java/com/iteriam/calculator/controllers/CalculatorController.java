@@ -7,13 +7,13 @@ import io.corp.calculator.TracerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("iteriam/api")
@@ -40,5 +40,17 @@ public class CalculatorController {
             tracer.trace("Operation not supported");
             return new ResponseEntity<>("Operation not supported",HttpStatus.METHOD_NOT_ALLOWED);
         }
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public Map<String, String> handleServiceCallException(MethodArgumentTypeMismatchException e) {
+        Map<String, String> errMessages = new HashMap<>();
+        errMessages.put("error", "MethodArgumentTypeMismatchException");
+        errMessages.put("message", e.getMessage());
+        errMessages.put("parameter", e.getName());
+        errMessages.put("errorCode", e.getErrorCode());
+        return errMessages;
     }
 }

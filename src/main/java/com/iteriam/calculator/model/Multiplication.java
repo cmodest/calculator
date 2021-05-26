@@ -9,10 +9,7 @@ public class Multiplication implements Operation{
 
     @Override
     public Boolean isThis(final String operation){
-        if(operation.equalsIgnoreCase("multiplication") || operation.equals("*")){
-            return true;
-        }
-        return false;
+        return operation.equalsIgnoreCase("multiplication") || operation.equals("*");
     }
 
     @Override

@@ -9,10 +9,7 @@ public class Substraction implements Operation{
 
     @Override
     public Boolean isThis(final String operation){
-        if(operation.equalsIgnoreCase("substraction") || operation.equals("-")){
-            return true;
-        }
-        return false;
+        return operation.equalsIgnoreCase("substraction") || operation.equals("-");
     }
 
     @Override
